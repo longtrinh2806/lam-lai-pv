@@ -23,14 +23,19 @@ namespace Demo.Controllers
         {
             var result = _orderService.Create(request);
 
-            if (result == false)
-                return BadRequest();
+            if (!result.IsSuccess)
+                return BadRequest(result);
             return Ok(result);
         }
         [HttpGet]
-        public List<OrderResponse> GetOrder(DateTime from, DateTime to)
+        public IActionResult GetOrder(DateTime from, DateTime to)
         {
-            return(_orderService.GetOrderByDateTime(from, to));
+            var result = _orderService.GetOrderByDateTime(from, to);
+
+            if (!result.IsSuccess)
+                return BadRequest(result);
+            return Ok(result);
+
         }
     }
 }

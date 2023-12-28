@@ -14,10 +14,5 @@ namespace Demo.Data.Entities
         public int Price { get; set; }
         public Product Product { get; set; }
         public Order Order { get; set; }
-
-        public override string ToString()
-        {
-            return $"OrderDetail: {OrderId}, ProductId: {ProductId}, Quantity: {Quantity}, Price: {Price}, Product: {Product?.Name}, Order: {Order?.Id}";
-        }
     }
 }

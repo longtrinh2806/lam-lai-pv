@@ -12,3 +12,17 @@ D:\Learning IT\Learning ASP NET\Demo.Data\obj\Debug\net6.0\refint\Demo.Data.dll
 D:\Learning IT\Learning ASP NET\Demo.Data\obj\Debug\net6.0\Demo.Data.pdb
 D:\Learning IT\Learning ASP NET\Demo.Data\obj\Debug\net6.0\Demo.Data.genruntimeconfig.cache
 D:\Learning IT\Learning ASP NET\Demo.Data\obj\Debug\net6.0\ref\Demo.Data.dll
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\bin\Debug\net6.0\Demo.Data.deps.json
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\bin\Debug\net6.0\Demo.Data.runtimeconfig.json
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\bin\Debug\net6.0\Demo.Data.dll
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\bin\Debug\net6.0\Demo.Data.pdb
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.csproj.AssemblyReference.cache
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.AssemblyInfoInputs.cache
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.AssemblyInfo.cs
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.csproj.CoreCompileInputs.cache
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.dll
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\refint\Demo.Data.dll
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.pdb
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\Demo.Data.genruntimeconfig.cache
+D:\Learning IT\Learning ASP NET\test-pv\Demo.Data\obj\Debug\net6.0\ref\Demo.Data.dll

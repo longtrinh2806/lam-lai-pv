@@ -14,8 +14,8 @@ namespace Demo.Service.Core
 {
     public interface IOrderService
     {
-        bool Create(List<OrderRequest> request);
-        List<OrderResponse> GetOrderByDateTime(DateTime from, DateTime to);
+        ResponseModel Create(List<OrderRequest> request);
+        ResponseModel GetOrderByDateTime(DateTime from, DateTime to);
     }
     public class OrderService : IOrderService
     {
@@ -25,16 +25,25 @@ namespace Demo.Service.Core
         {
             this.appDbContext = appDbContext;
         }
-        public bool Create(List<OrderRequest> request)
+        public ResponseModel Create(List<OrderRequest> request)
         {
-            if (request == null)
-                return false;
-            if (request.Any(tmp => tmp.Quantity < 1 || tmp.Quantity >= 100))
-                return false;
+            ResponseModel result = new();
 
-            // Check connection to database
-            if (!appDbContext.Database.CanConnect())
-                throw new Exception("Can't connect to the database");
+            if (request == null)
+            {
+                result.IsSuccess = false;
+                result.Message = "Invalid request!";
+
+                return result;
+            }
+                
+            if (request.Any(tmp => tmp.Quantity < 1 || tmp.Quantity >= 100))
+            {
+                result.IsSuccess = false;
+                result.Message = "Invalid quantity!";
+
+                return result;
+            }
 
             using var transaction = new TransactionScope(TransactionScopeOption.Required);
             try
@@ -51,8 +60,10 @@ namespace Demo.Service.Core
                 request.ForEach(o =>
                 {
                     var p = appDbContext.Products.FirstOrDefault(tmp => tmp.Id.Equals(o.ProductId));
+
                     if (p == null)
                         throw new Exception("Product not existed");
+
                     if (p.Quantity < o.Quantity)
                         throw new Exception("Out of stock");
 
@@ -82,20 +93,27 @@ namespace Demo.Service.Core
 
                 appDbContext.SaveChanges();
 
+                result.IsSuccess = true;
+                result.Message = "Create Order Successfully";
+
                 transaction.Complete();
-                return true;
+
+                return result;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 transaction.Dispose();
 
-                Console.WriteLine(e.Message);
-                return false;
+                result.IsSuccess = false;
+                result.Message = ex.Message;
+
+                return result;
             }
         }
 
-        public List<OrderResponse> GetOrderByDateTime(DateTime from, DateTime to)
+        public ResponseModel GetOrderByDateTime(DateTime from, DateTime to)
         {
+            ResponseModel result = new();
 
             var orderDetails = appDbContext.Orders
                 .Join(appDbContext.OrderDetails, o => o.Id, od => od.OrderId, (o, od) => od)
@@ -103,7 +121,12 @@ namespace Demo.Service.Core
                 .ToList();
 
             if (orderDetails == null)
-                throw new Exception("Order Detail is null");
+            {
+                result.IsSuccess = false;
+                result.Message = "Order Detail is null";
+
+                return result;
+            }
 
             // Map danh sach order details to Order Response List
             var orderResponses = orderDetails
@@ -112,7 +135,11 @@ namespace Demo.Service.Core
                     ProductName = p.Name, Quantity = od.Quantity
                 }).ToList();
 
-            return orderResponses;
+            result.Result = orderResponses;
+            result.IsSuccess = true;
+            result.Message = "Get Successfully";
+
+            return result;
         }
 
     }
