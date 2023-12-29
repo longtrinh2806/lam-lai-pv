@@ -64,8 +64,6 @@ namespace Demo.Service.Core
 
                 _appDbContext.Update(product);
 
-                Thread.Sleep(request.t);
-
                 _appDbContext.SaveChanges();
 
 

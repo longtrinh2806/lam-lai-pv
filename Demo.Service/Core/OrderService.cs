@@ -45,69 +45,70 @@ namespace Demo.Service.Core
                 return result;
             }
 
-            using var transaction = new TransactionScope(TransactionScopeOption.Required);
-            try
+            using (var transaction = appDbContext.Database.BeginTransaction())
             {
-                var order = new Order
+                try
                 {
-                    Code = DateTime.Now.Ticks.ToString(),
-                    TotalPrice = 0
-                };
+                    var order = new Order
+                    {
+                        Code = DateTime.Now.Ticks.ToString(),
+                        TotalPrice = 0
+                    };
 
-                // List tam
-                List<OrderDetail> orderDetails = new();
+                    // List tam
+                    List<OrderDetail> orderDetails = new();
 
-                request.ForEach(o =>
+                    request.ForEach(o =>
+                    {
+                        var p = appDbContext.Products.FirstOrDefault(tmp => tmp.Id.Equals(o.ProductId));
+
+                        if (p == null)
+                            throw new Exception("Product not existed");
+
+                        if (p.Quantity < o.Quantity)
+                            throw new Exception("Out of stock");
+
+                        order.TotalPrice += p.Price * o.Quantity;
+
+                        p.Quantity -= o.Quantity;
+
+                        appDbContext.Update(p);
+
+                        // Map request to Order Detail
+                        OrderDetail detail = new();
+                        o.Adapt(detail);
+
+                        // Them vao List tam
+                        orderDetails.Add(detail);
+                    });
+
+                    order.Date = DateTime.Now;
+
+                    appDbContext.Orders.Add(order);
+
+                    orderDetails.ForEach(od =>
+                    {
+                        od.OrderId = order.Id;
+                        appDbContext.OrderDetails.Add(od);
+                    });
+
+                    appDbContext.SaveChanges();
+
+                    result.IsSuccess = true;
+                    result.Message = "Create Order Successfully";
+
+                    transaction.Commit();
+                    return result;
+                }
+                catch (Exception ex)
                 {
-                    var p = appDbContext.Products.FirstOrDefault(tmp => tmp.Id.Equals(o.ProductId));
+                    transaction.Rollback();
 
-                    if (p == null)
-                        throw new Exception("Product not existed");
+                    result.IsSuccess = false;
+                    result.Message = ex.Message;
 
-                    if (p.Quantity < o.Quantity)
-                        throw new Exception("Out of stock");
-
-                    order.TotalPrice += p.Price * o.Quantity;
-
-                    p.Quantity -= o.Quantity;
-
-                    appDbContext.Update(p);
-
-                    // Map request to Order Detail
-                    OrderDetail detail = new();
-                    o.Adapt(detail);
-
-                    // Them vao List tam
-                    orderDetails.Add(detail);
-                });
-
-                order.Date = DateTime.Now;
-
-                appDbContext.Orders.Add(order);
-
-                orderDetails.ForEach(od =>
-                {
-                    od.OrderId = order.Id;
-                    appDbContext.OrderDetails.Add(od);
-                });
-
-                appDbContext.SaveChanges();
-
-                result.IsSuccess = true;
-                result.Message = "Create Order Successfully";
-
-                transaction.Complete();
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                transaction.Dispose();
-
-                result.IsSuccess = false;
-                result.Message = ex.Message;
-
-                return result;
+                    return result;
+                }
             }
         }
 

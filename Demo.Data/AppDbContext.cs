@@ -1,5 +1,6 @@
 ﻿using Demo.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Demo.Data
 {

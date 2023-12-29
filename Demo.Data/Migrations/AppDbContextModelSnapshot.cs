@@ -92,6 +92,9 @@ namespace Demo.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Quantity")
+                        .HasDatabaseName("ProductQuantity_CK");
+
                     b.ToTable("Products");
                 });
 

@@ -27,7 +27,6 @@ namespace Demo.Controllers
 
         [HttpPost]
         [Route("pagination")]
-        
         public IActionResult GetAllProduct(PagingModel pagingModel)
         {
             var products = _productService.Get(pagingModel);

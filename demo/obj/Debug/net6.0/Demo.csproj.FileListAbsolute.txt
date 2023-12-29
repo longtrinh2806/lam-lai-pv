@@ -164,3 +164,4 @@ D:\Learning IT\Learning ASP NET\test-pv\demo\obj\Debug\net6.0\refint\Demo.dll
 D:\Learning IT\Learning ASP NET\test-pv\demo\obj\Debug\net6.0\Demo.pdb
 D:\Learning IT\Learning ASP NET\test-pv\demo\obj\Debug\net6.0\Demo.genruntimeconfig.cache
 D:\Learning IT\Learning ASP NET\test-pv\demo\obj\Debug\net6.0\ref\Demo.dll
+D:\Learning IT\Learning ASP NET\test-pv\demo\bin\Debug\net6.0\EFCore.CheckConstraints.dll

@@ -2,6 +2,24 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "EFCore.CheckConstraints/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.0",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/EFCore.CheckConstraints.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/EFCore.CheckConstraints.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "EntityFramework/6.4.4": {
         "type": "package",
         "dependencies": {
@@ -926,6 +944,19 @@
     }
   },
   "libraries": {
+    "EFCore.CheckConstraints/6.0.0": {
+      "sha512": "c9wvopkPAZVttEWBjpEakTNPfb9Ro0UKFCQpfOYRkvRKlSQAbA2crMDVV3CecyHMX0w7O1DEKmePbxnXZElzvQ==",
+      "type": "package",
+      "path": "efcore.checkconstraints/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "efcore.checkconstraints.6.0.0.nupkg.sha512",
+        "efcore.checkconstraints.nuspec",
+        "lib/net6.0/EFCore.CheckConstraints.dll",
+        "lib/net6.0/EFCore.CheckConstraints.xml"
+      ]
+    },
     "EntityFramework/6.4.4": {
       "sha512": "yj1+/4tci7Panu3jKDHYizxwVm0Jvm7b7m057b5h4u8NUHGCR8WIWirBTw+8EptRffwftIWPBeIRGNKD1ewEMQ==",
       "type": "package",
@@ -2494,6 +2525,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "EFCore.CheckConstraints >= 6.0.0",
       "EntityFramework >= 6.4.4",
       "Mapster >= 7.4.0",
       "Microsoft.EntityFrameworkCore >= 6.0.25",
@@ -2547,6 +2579,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "EFCore.CheckConstraints": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
           "EntityFramework": {
             "target": "Package",
             "version": "[6.4.4, )"

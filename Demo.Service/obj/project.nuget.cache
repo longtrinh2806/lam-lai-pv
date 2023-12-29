@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dhoCT7wQG9P0CuhJZKlKk7ilMGQJvhQnXwDjaYxfCQDF2TPjyc9XGfg3pMDrsjj4mmCAu5i9uzGbPohd4fY7jA==",
+  "dgSpecHash": "blp+8Tz/nsa7N4j6nVMmJXPBteZ4yrqkOmAnsVrFcfZ4qWNwcsDqDUKSAWU9h/8O2AZz/HbNH/rgBxnhp2Qwiw==",
   "success": true,
   "projectFilePath": "D:\\Learning IT\\Learning ASP NET\\test-pv\\Demo.Service\\Demo.Service.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\trinh\\.nuget\\packages\\efcore.checkconstraints\\6.0.0\\efcore.checkconstraints.6.0.0.nupkg.sha512",
     "C:\\Users\\trinh\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\trinh\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\trinh\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",

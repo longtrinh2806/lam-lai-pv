@@ -14,6 +14,19 @@
           "Demo.Service.dll": {}
         }
       },
+      "EFCore.CheckConstraints/6.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.25",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.25",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/EFCore.CheckConstraints.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.0"
+          }
+        }
+      },
       "EntityFramework/6.4.4": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
@@ -572,6 +585,7 @@
       },
       "Demo.Data/1.0.0": {
         "dependencies": {
+          "EFCore.CheckConstraints": "6.0.0",
           "EntityFramework": "6.4.4",
           "Mapster": "7.4.0",
           "Microsoft.EntityFrameworkCore": "6.0.25",
@@ -588,6 +602,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "EFCore.CheckConstraints/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-c9wvopkPAZVttEWBjpEakTNPfb9Ro0UKFCQpfOYRkvRKlSQAbA2crMDVV3CecyHMX0w7O1DEKmePbxnXZElzvQ==",
+      "path": "efcore.checkconstraints/6.0.0",
+      "hashPath": "efcore.checkconstraints.6.0.0.nupkg.sha512"
     },
     "EntityFramework/6.4.4": {
       "type": "package",
