@@ -4,7 +4,7 @@ using Demo.Data.ViewModel;
 using Mapster;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,25 +116,50 @@ namespace Demo.Service.Core
         {
             ResponseModel result = new();
 
-            var orderDetails = appDbContext.Orders
-                .Join(appDbContext.OrderDetails, o => o.Id, od => od.OrderId, (o, od) => od)
-                .Where(od => od.Order.Date >= from && od.Order.Date <= to)
+            //var orderResponses = appDbContext.Orders
+            //    .Join(appDbContext.OrderDetails, o => o.Id, od => od.OrderId, (o, od) => od)
+            //    .Where(od => od.Order.Date >= from && od.Order.Date <= to)
+            //    .GroupBy(od => od.ProductId)
+            //    .Select(group => new OrderResponse
+            //    {
+            //        ProductName = group.First().Product.Name,
+            //        Quantity = group.Sum(od => od.Quantity)
+            //    })
+            //    .ToList();
+
+            //if (orderResponses == null)
+            //{
+            //    result.IsSuccess = false;
+            //    result.Message = "Order Detail is null";
+
+            //    return result;
+            //}
+
+
+            var orderResponses = appDbContext.Orders
+                .Where(order => order.Date >= from && order.Date <= to)
+                .Include(order => order.OrderDetails)
+                    .ThenInclude(orderDetail => orderDetail.Product)
+                .SelectMany(order => order.OrderDetails, (order, orderDetail) => new OrderResponse
+                {
+                    ProductName = orderDetail.Product.Name,
+                    Quantity = orderDetail.Quantity
+                })
+                .GroupBy(ordeResponse => ordeResponse.ProductName)
+                .Select(group => new OrderResponse
+                {
+                    ProductName = group.Key,
+                    Quantity = group.Sum(od => od.Quantity)
+                })
                 .ToList();
 
-            if (orderDetails == null)
+            if (orderResponses == null)
             {
                 result.IsSuccess = false;
                 result.Message = "Order Detail is null";
 
                 return result;
             }
-
-            // Map danh sach order details to Order Response List
-            var orderResponses = orderDetails
-                .Join(appDbContext.Products, od => od.ProductId, p => p.Id, (od, p) => new OrderResponse
-                {
-                    ProductName = p.Name, Quantity = od.Quantity
-                }).ToList();
 
             result.Result = orderResponses;
             result.IsSuccess = true;
